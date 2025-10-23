@@ -1,6 +1,6 @@
 {
   "name": "usevecollection",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "React hook for VECollection",
   "scripts": {
     "prepublishOnly": "npm run tsc",

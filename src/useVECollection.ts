@@ -3,7 +3,9 @@ import { useCallback, useState } from 'react';
 
 interface VECollectionHook<S extends object> {
     addToCollection: (_: S) => void,
+    addAllToCollection: (_: VECollection<S>) => void,
     removeFromCollection: (_: S) => void,
+    removeFirstFoundFromCollection: (_: (_: S) => boolean) => void,
     collection: VECollection<S>    
 }
 
@@ -20,6 +22,14 @@ export default function useVECollection<T extends object>(array?: Array<T>): VEC
         });
     }, []);
 
+    const addAllToCollection = useCallback((allElems: VECollection<T>) => {
+        setCollectionState((collectionSoFar) => {
+            const collectionCopy = collectionSoFar.copy();
+            collectionCopy.addAll(allElems);
+            return collectionCopy;
+        });
+    }, []);
+
     const removeFromCollection = useCallback((elem: T) => {
        setCollectionState((collectionSoFar) => {
             const collectionCopy = collectionSoFar.copy();
@@ -29,5 +39,14 @@ export default function useVECollection<T extends object>(array?: Array<T>): VEC
        });
     }, []);
 
-    return { addToCollection, removeFromCollection, collection: collectionState };
+    const removeFirstFoundFromCollection = useCallback((findFn: (_: T) => boolean) => {
+        setCollectionState((collectionSoFar) => {
+            const collectionCopy = collectionSoFar.copy();
+            // TODO: capture failure for logging
+            collectionCopy.findAndRemoveFirstOccurrence(findFn);
+            return collectionCopy;
+       });
+    }, []);
+
+    return { addToCollection, addAllToCollection, removeFromCollection, removeFirstFoundFromCollection, collection: collectionState };
 };
