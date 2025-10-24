@@ -9,8 +9,8 @@ interface VECollectionHook<S extends object> {
     collection: VECollection<S>    
 }
 
-export default function useVECollection<T extends object>(array?: Array<T>): VECollectionHook<T> {
-    const collection = new VECollection<T>(array);
+export default function useVECollection<T extends object>(set: Set<T> = new Set<T>()): VECollectionHook<T> {
+    const collection = new VECollection<T>(set);
 
     const [collectionState, setCollectionState] = useState<VECollection<T>>(collection);
 
