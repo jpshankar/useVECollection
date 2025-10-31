@@ -1,6 +1,6 @@
 {
   "name": "usevecollection",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "React hook for VECollection",
   "scripts": {
     "prepublishOnly": "npm run tsc",
@@ -22,7 +22,7 @@
     "@types/react": "^19.2.2",
     "react": "^19.2.0",
     "typescript": "^5.9.3",
-    "vecollection": "^0.0.9"
+    "vecollection": "^0.0.10"
   },
   "main": "./lib/src/useVECollection.js",
   "types": "./lib/types/useVECollection.d.ts",
