@@ -5,7 +5,7 @@ interface VECollectionHook<S extends object> {
     addToCollection: (_: S) => void,
     addAllToCollection: (_: VECollection<S>) => void,
     removeFromCollection: (_: S) => void,
-    removeFirstFoundFromCollection: (_: (_: S) => boolean) => void,,
+    removeFirstFoundFromCollection: (_: (_: S) => boolean) => void,
     clearCollection: () => void,
     collection: VECollection<S>    
 }
