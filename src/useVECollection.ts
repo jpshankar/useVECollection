@@ -5,7 +5,8 @@ interface VECollectionHook<S extends object> {
     addToCollection: (_: S) => void,
     addAllToCollection: (_: VECollection<S>) => void,
     removeFromCollection: (_: S) => void,
-    removeFirstFoundFromCollection: (_: (_: S) => boolean) => void,
+    removeFirstFoundFromCollection: (_: (_: S) => boolean) => void,,
+    clearCollection: () => void,
     collection: VECollection<S>    
 }
 
@@ -48,5 +49,13 @@ export default function useVECollection<T extends object>(set: Set<T> = new Set<
        });
     }, []);
 
-    return { addToCollection, addAllToCollection, removeFromCollection, removeFirstFoundFromCollection, collection: collectionState };
+    const clearCollection = useCallback(() => {
+        setCollectionState((collectionSoFar) => {
+            const collectionCopy = collectionSoFar.copy();
+            collectionSoFar.clear();
+            return collectionCopy;
+        });
+    }, []);
+
+    return { addToCollection, addAllToCollection, removeFromCollection, removeFirstFoundFromCollection, clearCollection, collection: collectionState };
 };
